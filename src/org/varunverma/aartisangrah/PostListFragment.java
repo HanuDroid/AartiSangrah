@@ -156,7 +156,11 @@ public class PostListFragment extends ListFragment implements HanuFragmentInterf
 			} else {
 				rowView = convertView;
 			}
-
+			
+			if(postList.isEmpty() || position > postList.size()){
+				return rowView;
+			}
+			
 			TextView title = (TextView) rowView.findViewById(R.id.post_title);
 			title.setText(postList.get(position).getTitle());
 			if (dualPane) {
