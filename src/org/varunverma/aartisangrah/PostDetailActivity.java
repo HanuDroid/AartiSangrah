@@ -1,6 +1,5 @@
 package org.varunverma.aartisangrah;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,7 +11,6 @@ import com.google.ads.AdRequest;
 import com.google.ads.AdView;
 import com.google.analytics.tracking.android.EasyTracker;
 
-@SuppressLint("SetJavaScriptEnabled")
 public class PostDetailActivity extends FragmentActivity implements
 		PostDetailFragment.Callbacks {
 

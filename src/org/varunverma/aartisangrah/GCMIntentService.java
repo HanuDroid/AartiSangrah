@@ -1,5 +1,7 @@
 package org.varunverma.aartisangrah;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 
 import org.varunverma.CommandExecuter.ResultObject;
 import org.varunverma.hanu.Application.HanuGCMIntentService;
@@ -9,6 +11,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.NotificationCompat;
 
 public class GCMIntentService extends HanuGCMIntentService {
 	
@@ -16,16 +19,15 @@ public class GCMIntentService extends HanuGCMIntentService {
 	protected void onMessage(Context context, Intent intent) {
 		
 		String message = intent.getExtras().getString("message");
-		if(message.contentEquals("InfoMessage")){
+		if (message.contentEquals("InfoMessage")) {
 			// Show Info Message to the User
 			showInfoMessage(intent);
-		}
-		else{
-			
-			ResultObject result = processMessage(context,intent);
-			
-			if(result.isCommandExecutionSuccess() && result.getResultCode() == 200){
-				createNotification();
+		} else {
+
+			ResultObject result = processMessage(context, intent);
+
+			if (result.getData().getBoolean("ShowNotification")) {
+				createNotification(result);
 			}
 		}
 	}
@@ -34,54 +36,92 @@ public class GCMIntentService extends HanuGCMIntentService {
 		// Show Info Message
 		String subject = intent.getExtras().getString("subject");
 		String content = intent.getExtras().getString("content");
-		
+		String mid = intent.getExtras().getString("message_id");
+		if(mid == null || mid.contentEquals("")){
+			mid = "0";
+		}
+		int id = Integer.valueOf(mid);
+
 		NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-		
-		Notification notification = new Notification();
+
+		// Create Intent and Set Extras
+		Intent notificationIntent = new Intent(this, DisplayFile.class);
+
+		notificationIntent.putExtra("Title", "Info:");
+		notificationIntent.putExtra("Subject", subject);
+		notificationIntent.putExtra("Content", content);
+		notificationIntent.addCategory(subject);
+
+		PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
+
+		Notification notification = new NotificationCompat.Builder(this)
+										.setContentTitle(subject)
+										.setContentText(content)
+										.setSmallIcon(R.drawable.ic_launcher)
+										.setContentIntent(pendingIntent).build();
+
 		notification.icon = R.drawable.ic_launcher;
 		notification.tickerText = subject;
 		notification.when = System.currentTimeMillis();
-		
+
 		notification.flags |= Notification.FLAG_AUTO_CANCEL;
 		notification.defaults |= Notification.DEFAULT_SOUND;
 		notification.defaults |= Notification.DEFAULT_VIBRATE;
-		
-		// Create Intent and Set Extras
-		Intent notificationIntent = new Intent(this, DisplayFile.class);
-		
-		notificationIntent.putExtra("Title", "Info:");
-		notificationIntent.putExtra("Subject", subject);
-		notificationIntent.putExtra("Content", content);		
-		
-		PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
-		notification.setLatestEventInfo(this, subject, content, contentIntent);
-				
-		nm.notify(2, notification);
-		
+
+		nm.notify(id, notification);
 	}
 
-	private void createNotification() {
+	private void createNotification(ResultObject result) {
 		// Create Notification
-		
-		String message = "New aartis have been downloaded";
-		
+
+		ArrayList<String> postTitleList = result.getData().getStringArrayList("PostTitle");
+
 		NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-			
-		Notification notification = new Notification();
+
+		String title;
+		String text = postTitleList.get(0);
+
+		int postsDownloaded = result.getData().getInt("PostsDownloaded");
+		if (postsDownloaded == 0) {
+			title = "New aarti downloaded.";
+		} else {
+			title = postsDownloaded + " new aarti(s) have been downloaded";
+		}
+
+		Intent notificationIntent = new Intent(this, Main.class);
+		PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
+
+		NotificationCompat.Builder notifBuilder = new NotificationCompat.Builder(this)
+														.setContentTitle(title)
+														.setContentText(text)
+														.setContentInfo(String.valueOf(postsDownloaded))
+														.setSmallIcon(R.drawable.ic_launcher)
+														.setContentIntent(pendingIntent);
+
+		NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
+
+		inboxStyle.setBigContentTitle(title);
+		inboxStyle.setSummaryText("New aartis downloaded");
+
+		// Add joke titles
+		Iterator<String> i = postTitleList.listIterator();
+		while (i.hasNext()) {
+			inboxStyle.addLine(i.next());
+		}
+
+		// Moves the big view style object into the notification object.
+		notifBuilder.setStyle(inboxStyle);
+
+		Notification notification = notifBuilder.build();
 		notification.icon = R.drawable.ic_launcher;
-		notification.tickerText = message;
+		notification.tickerText = title;
 		notification.when = System.currentTimeMillis();
-		
+
 		notification.flags |= Notification.FLAG_AUTO_CANCEL;
 		notification.defaults |= Notification.DEFAULT_SOUND;
 		notification.defaults |= Notification.DEFAULT_VIBRATE;
-			
-		Intent notificationIntent = new Intent(this, Main.class);
-		PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
-		notification.setLatestEventInfo(this, message, message, contentIntent);
-				
+
 		nm.notify(1, notification);
-				
+
 	}
-	
 }

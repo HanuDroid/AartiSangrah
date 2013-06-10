@@ -1,6 +1,5 @@
 package org.varunverma.aartisangrah;
 
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,7 +9,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.varunverma.hanu.Application.Application;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -18,13 +16,13 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.Toast;
 
 import com.google.ads.AdView;
 
-@SuppressLint("SetJavaScriptEnabled")
 public class DisplayFile extends Activity {
 	
 	private String html_text;
@@ -125,6 +123,7 @@ public class DisplayFile extends Activity {
 
 	class FileJavaScriptInterface{
 		
+		@JavascriptInterface
 		public void buttonClick(String buttonName){
 			
 			if(buttonName.contentEquals("accept")){
@@ -139,6 +138,7 @@ public class DisplayFile extends Activity {
 			
 		}
 		
+		@JavascriptInterface
 		public void saveSettings(String bundle){
 			try {
 				JSONObject o = new JSONObject(bundle);
@@ -162,10 +162,12 @@ public class DisplayFile extends Activity {
 			}
 		}
 		
+		@JavascriptInterface
 		public String getParameterValue(String paramName){
 			return Application.getApplicationInstance().getOptions().get(paramName);
 		}
 		
+		@JavascriptInterface
 		public void verifyPassword(String pwd){
 			if(app.getOptions().get("password").contentEquals(pwd)){
 				setResult(RESULT_OK);

@@ -1,13 +1,11 @@
 package org.varunverma.aartisangrah;
 
-
 import org.varunverma.hanu.Application.Application;
 import org.varunverma.hanu.Application.HanuFragmentInterface;
 import org.varunverma.hanu.Application.HanuGestureAnalyzer;
 import org.varunverma.hanu.Application.HanuGestureListener;
 import org.varunverma.hanu.Application.Post;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -19,12 +17,12 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
+import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
 import com.google.analytics.tracking.android.EasyTracker;
 
-@SuppressLint("SetJavaScriptEnabled")
 public class PostDetailFragment extends Fragment implements HanuFragmentInterface, HanuGestureListener{
 
 	private Post post;
@@ -233,7 +231,7 @@ public class PostDetailFragment extends Fragment implements HanuFragmentInterfac
 	}
 
 	class PostJavaScriptInterface{
-		
+		@JavascriptInterface
 		public void loadPosts(String t, String n){
 			activity.loadPostsByCategory(t, n);
 		}		

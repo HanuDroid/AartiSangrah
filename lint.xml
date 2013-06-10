@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <issue id="JavascriptInterface">
+        <ignore path="src/org/varunverma/aartisangrah/DisplayFile.java" />
+        <ignore path="src/org/varunverma/aartisangrah/PostDetailFragment.java" />
+    </issue>
+    <issue id="SetJavaScriptEnabled">
+        <ignore path="src/org/varunverma/aartisangrah/DisplayFile.java" />
+    </issue>
+</lint>
