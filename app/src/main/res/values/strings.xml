@@ -1,0 +1,23 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <string name="app_name">आरती संग्रह</string>
+    <string name="title_activity_main">आरती संग्रह</string>
+    
+    <string name="BlogURL">http://hanu-droid.varunverma.org/Applications/AartiSangrah</string>
+    <string name="GoogleAnalyticsPropertyId" tools:ignore="TypographyDashes">UA-34707924-5</string>
+
+    <string name="loading">Loading....</string>
+    <string name="hanu_droid">Powered by: Hanu-Droid</string>
+
+    <string name="gcm_sender_id">870453302025</string>
+
+    <string name="title_color">blue</string>
+    <string name="title_font">arial,helvetica,sans-serif</string>
+    <string name="pub_date_color">black</string>
+    <string name="pub_date_font">verdana,geneva,sans-serif</string>
+    <string name="content_color">black</string>
+    <string name="content_font">arial,helvetica,sans-serif</string>
+    <string name="taxonomy_color">black</string>
+    <string name="taxonomy_font">arial,helvetica,sans-serif</string>
+    
+</resources>
