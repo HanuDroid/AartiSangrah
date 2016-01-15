@@ -89,9 +89,9 @@ public class AppGcmListenerService extends HanuGCMListenerService {
 
 		int postsDownloaded = result.getData().getInt("PostsDownloaded");
 		if (postsDownloaded == 0) {
-			title = "New Jokes downloaded.";
+			title = "New Aartis downloaded.";
 		} else {
-			title = postsDownloaded + " new joke(s) have been downloaded";
+			title = postsDownloaded + " new Aarti(s) have been downloaded";
 		}
 
 		Intent notificationIntent = new Intent(this, Main.class);
