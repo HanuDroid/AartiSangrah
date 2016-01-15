@@ -4,7 +4,6 @@
 /build
 app/build
 app/app.iml
-*.gradle
 gradle*
 
 # Built application files
