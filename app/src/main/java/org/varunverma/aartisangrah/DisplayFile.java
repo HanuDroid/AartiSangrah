@@ -7,7 +7,6 @@ import java.io.InputStreamReader;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.varunverma.hanu.Application.Application;
 
 import android.app.Activity;
 import android.content.res.Configuration;
@@ -21,6 +20,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.Toast;
 
+import com.ayansh.hanudroid.Application;
 import com.google.android.gms.ads.AdView;
 
 public class DisplayFile extends Activity {
@@ -96,7 +96,7 @@ public class DisplayFile extends Activity {
 	private void showFromRawSource() {
 		my_web_view.clearCache(true);
         my_web_view.setBackgroundColor(Color.TRANSPARENT);
-        my_web_view.setBackgroundResource(R.drawable.background);
+        my_web_view.setBackgroundResource(R.mipmap.background);
         my_web_view.loadData(html_text, "text/html", "utf-8");
 	}
 

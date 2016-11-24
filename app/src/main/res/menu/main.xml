@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-	
-	<item android:icon="@drawable/help"
-		  android:id="@+id/Help"
-		  android:showAsAction="ifRoom"
-		  android:title="Help">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	tools:context=".Main">
+
+	<item android:icon="@mipmap/help"
+		android:id="@+id/Help"
+		app:showAsAction="ifRoom"
+		android:title="Help">
 	</item>
 	
-	<item android:icon="@drawable/about"
-		  android:id="@+id/About"
-		  android:showAsAction="ifRoom"
-		  android:title="About">
+	<item android:icon="@mipmap/about"
+		android:id="@+id/About"
+		app:showAsAction="ifRoom"
+		android:title="About">
 	</item>
 			
 </menu>

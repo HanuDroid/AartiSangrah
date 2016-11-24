@@ -18,7 +18,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/post_detail"
         android:layout_above="@id/adView"
-        android:background="@drawable/background"
+        android:background="@mipmap/background"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
     </FrameLayout>
