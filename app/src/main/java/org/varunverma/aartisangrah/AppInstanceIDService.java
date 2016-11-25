@@ -1,11 +1,15 @@
 package org.varunverma.aartisangrah;
 
-import com.ayansh.hanudroid.HanuInstanceIDListenerService;
+import com.ayansh.hanudroid.Application;
+import com.ayansh.hanudroid.HanuInstanceIDService;
 
-public class AppInstanceIDService extends HanuInstanceIDListenerService {
+public class AppInstanceIDService extends HanuInstanceIDService {
 
     @Override
     public void onTokenRefresh() {
+
+        // Be Safe. Set Context.
+        Application.getApplicationInstance().setContext(getApplicationContext());
 
         super.onTokenRefresh();
 

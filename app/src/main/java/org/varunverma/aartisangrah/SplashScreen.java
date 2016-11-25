@@ -16,6 +16,7 @@ import com.ayansh.CommandExecuter.ProgressInfo;
 import com.ayansh.CommandExecuter.ResultObject;
 import com.ayansh.hanudroid.Application;
 import com.ayansh.hanudroid.SaveRegIdCommand;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 public class SplashScreen extends Activity implements Invoker {
 	
@@ -24,7 +25,7 @@ public class SplashScreen extends Activity implements Invoker {
 	private boolean appStarted = false;
 	private boolean firstUse = false;
 	private boolean showNewFeatures = false;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		
@@ -72,12 +73,6 @@ public class SplashScreen extends Activity implements Invoker {
 		String regId = (String) app.getOptions().get("RegistrationId");
 
 		if(regId == null || regId.contentEquals("")) {
-
-			Intent intent = new Intent(this, AppRegistrationService.class);
-			startService(intent);
-
-		}
-		else{
 
 			if(regStatus == null || regStatus.contentEquals("")) {
 
