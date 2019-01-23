@@ -2,9 +2,13 @@ package org.varunverma.aartisangrah;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -100,6 +104,9 @@ public class SplashScreen extends Activity implements Invoker {
 			statusView.setText("Initializing app for first use.\nPlease wait, this may take a while");
 			app.initializeAppForFirstUse(this);
 
+            // Create Notification Channels
+            createNotificationChannels();
+
 		} else {
 
 			// Regular use. Initialize App
@@ -125,6 +132,9 @@ public class SplashScreen extends Activity implements Invoker {
 			if (newAppVersion > oldAppVersion || newFrameworkVersion > oldFrameworkVersion) {
 				showNewFeatures = true;
 				app.updateVersion();
+
+                // Create Notification Channels
+                createNotificationChannels();
 			}
 		}
 
@@ -249,5 +259,28 @@ public class SplashScreen extends Activity implements Invoker {
 		Log.i(Application.TAG, "Kill splash Activity");
 		SplashScreen.this.finish();
 	}
+
+	private void createNotificationChannels(){
+
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+
+            NotificationChannel channel;
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+
+            channel = new NotificationChannel("NEW_CONTENT", "New or Updated Content", importance);
+            channel.setDescription("Notifications when new or updated content is received");
+            notificationManager.createNotificationChannel(channel);
+
+            channel = new NotificationChannel("INFO_MESSAGE", "Information and Announcements", importance);
+            channel.setDescription("Notification when important information or announcement is published from App Developer");
+            notificationManager.createNotificationChannel(channel);
+
+        }
+
+    }
 
 }

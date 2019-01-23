@@ -7,8 +7,10 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
 
+import com.google.ads.mediation.admob.AdMobAdapter;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 
 public class PostDetailActivity extends FragmentActivity implements
 		PostDetailFragment.Callbacks {
@@ -19,13 +21,19 @@ public class PostDetailActivity extends FragmentActivity implements
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 
+		MobileAds.initialize(this, "ca-app-pub-4571712644338430~9809511505");
+
 		// Hide some views
 		View postList = findViewById(R.id.post_list);
 		if(postList != null){
 			postList.setVisibility(View.GONE);
 		}
 
+		Bundle extras = new Bundle();
+		extras.putString("max_ad_content_rating", "G");
+
 		AdRequest adRequest = new AdRequest.Builder()
+                .addNetworkExtrasBundle(AdMobAdapter.class, extras)
 				.addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
 				.addTestDevice("9F11CAC92EB404500CAA3F8B0BBA5277").build();
 
