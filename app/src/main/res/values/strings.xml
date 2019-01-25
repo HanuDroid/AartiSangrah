@@ -3,7 +3,7 @@
     <string name="app_name">आरती संग्रह</string>
     <string name="title_activity_main">आरती संग्रह</string>
     
-    <string name="BlogURL">http://hanu-droid.varunverma.org/Applications/AartiSangrah</string>
+    <string name="BlogURL">https://hanu-droid.varunverma.org/Applications/AartiSangrah</string>
     <string name="GoogleAnalyticsPropertyId" tools:ignore="TypographyDashes">UA-34707924-5</string>
 
     <string name="loading">Loading....</string>
