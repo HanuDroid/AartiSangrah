@@ -35,7 +35,7 @@ public class PostDetailActivity extends FragmentActivity implements
 		AdRequest adRequest = new AdRequest.Builder()
                 .addNetworkExtrasBundle(AdMobAdapter.class, extras)
 				.addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-				.addTestDevice("9F11CAC92EB404500CAA3F8B0BBA5277").build();
+				.addTestDevice("F19E4441D9BACBC288FAE336CEC0BEFC").build();
 
 		AdView adView = (AdView) findViewById(R.id.adView);
 
