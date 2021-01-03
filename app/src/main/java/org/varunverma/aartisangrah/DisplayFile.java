@@ -164,12 +164,12 @@ public class DisplayFile extends Activity {
 		
 		@JavascriptInterface
 		public String getParameterValue(String paramName){
-			return Application.getApplicationInstance().getOptions().get(paramName);
+			return Application.getApplicationInstance().readParameterValue(paramName);
 		}
 		
 		@JavascriptInterface
 		public void verifyPassword(String pwd){
-			if(app.getOptions().get("password").contentEquals(pwd)){
+			if(app.readParameterValue("password").contentEquals(pwd)){
 				setResult(RESULT_OK);
 				finish();
 			}

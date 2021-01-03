@@ -73,8 +73,8 @@ public class SplashScreen extends Activity implements Invoker {
 	private void startMainActivity() {
 
 		// Register application.
-		String regStatus = (String) app.getOptions().get("RegistrationStatus");
-		String regId = (String) app.getOptions().get("RegistrationId");
+		String regStatus = (String) app.readParameterValue("RegistrationStatus");
+		String regId = (String) app.readParameterValue("RegistrationId");
 
 		if(regId == null || regId.contentEquals("")) {
 

@@ -3,7 +3,6 @@ package org.varunverma.aartisangrah;
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
@@ -14,6 +13,8 @@ import android.view.ViewGroup;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+
+import androidx.fragment.app.Fragment;
 
 import com.ayansh.hanudroid.Application;
 import com.ayansh.hanudroid.HanuFragmentInterface;
